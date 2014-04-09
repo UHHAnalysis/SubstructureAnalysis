@@ -153,6 +153,8 @@ void SubstructureCycle::ExecuteEvent( const SInputData& id, Double_t weight) thr
     std::cout << "run: " << calc->GetRunNum() << "   lb: " << calc->GetLumiBlock() << "  event: " << calc->GetEventNum() << "   N(jets): " << calc->GetJets()->size() << std::endl;
   }
 
+  // torben was here
+
   // start the analysis
   HistsNoCuts->Fill();
   Chi2_HistsNoCuts->Fill();
