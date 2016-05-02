@@ -18,33 +18,6 @@ bool SubstructureGeneratorPreSelection::pass(BaseCycleContainer *bcc)
   if(sel) return true; 
   return false;
 
-  /*
-  // if(!bcc->topjetsgen){return false;}
-  std::vector<GenParticle>* genparts = bcc->genparticles;
-  int Ngenparts = genparts->size();
-
-  bool lept = false;
-  bool hadr = false;
- 
-  //look for semileptonic ttbar decays including electrons or muons
-  for(int l=0; l<Ngenparts ; l++){
-    GenParticle genpart = genparts->at(l);
-    if(genpart.status()<3){break;}
-    if( fabs(genpart.pdgId()) == 6){//top-quarks
-      const  GenParticle* daughter1 = genpart.daughter(genparts, 1);
-      if((fabs(daughter1->pdgId())!=24)) daughter1 = genpart.daughter(genparts, 2);//W-bosons
-   
-      if(daughter1->daughter(genparts, 1)){
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())>10 && fabs(daughter1->daughter(genparts, 1)->pdgId())<15){lept=true;}
-
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())<6){hadr = true;}
-      }
-    }
-  }
-  if(hadr && lept ) return true;
-
-  return false;
-  */
 }
 
 std::string SubstructureGeneratorPreSelection::description()
@@ -59,11 +32,6 @@ SubstructureGeneratorPreSelectionMuon::SubstructureGeneratorPreSelectionMuon(dou
 
 bool SubstructureGeneratorPreSelectionMuon::pass(BaseCycleContainer *bcc)
 {
-  /*  bool ehad = false;
-  TTbarGen* ttbar;
-  if(ttbar->DecayChannel() == TTbarGen::e_muhad) return true; 
-  return false;
-  */
 
   bool muhad = false;
   TTbarGen *ttbar = new TTbarGen(bcc);
@@ -73,34 +41,7 @@ bool SubstructureGeneratorPreSelectionMuon::pass(BaseCycleContainer *bcc)
   if(muhad) return true; 
   return false;
 
-  /*
-  // if(!bcc->topjetsgen){return false;}
-  std::vector<GenParticle>* genparts = bcc->genparticles;
-  int Ngenparts = genparts->size();
-
-  bool lept = false;
-  bool hadr = false;
  
-  //look for semileptonic ttbar decays including electrons or muons
-  for(int l=0; l<Ngenparts ; l++){
-    GenParticle genpart = genparts->at(l);
-    if(genpart.status()<3){break;}
-    if( fabs(genpart.pdgId()) == 6){//top-quarks
-      const  GenParticle* daughter1 = genpart.daughter(genparts, 1);
-      if((fabs(daughter1->pdgId())!=24)) daughter1 = genpart.daughter(genparts, 2);//W-bosons
-      if( (fabs(daughter1->pdgId())!=24)) cout << daughter1->pdgId() << endl;
-   
-      if(daughter1->daughter(genparts, 1)){
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())>12 && fabs(daughter1->daughter(genparts, 1)->pdgId())<15){lept=true;}
-
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())<6){hadr = true;}
-      }
-    }
-  }
-  if(hadr && lept ) return true;
-
-  return false;
-  */
 }
 
 std::string SubstructureGeneratorPreSelectionMuon::description()
@@ -116,11 +57,6 @@ SubstructureGeneratorPreSelectionElectron::SubstructureGeneratorPreSelectionElec
 
 bool SubstructureGeneratorPreSelectionElectron::pass(BaseCycleContainer *bcc)
 {
-  /*
-  TTbarGen* ttbar;
-  if(ttbar->DecayChannel() == TTbarGen::e_ehad) return true; 
-  return false;
-  */
 
   bool ehad = false;
   TTbarGen *ttbar = new TTbarGen(bcc);
@@ -130,35 +66,7 @@ bool SubstructureGeneratorPreSelectionElectron::pass(BaseCycleContainer *bcc)
   if(ehad) return true; 
   return false;
  
-  /*
-  // if(!bcc->topjetsgen){return false;}
-  std::vector<GenParticle>* genparts = bcc->genparticles;
-  int Ngenparts = genparts->size();
-
-  bool lept = false;
-  bool hadr = false;
  
-  //look for semileptonic ttbar decays including electrons or muons
-  for(int l=0; l<Ngenparts ; l++){
-    GenParticle genpart = genparts->at(l);
-    if(genpart.status()<3){break;}
-    if( fabs(genpart.pdgId()) == 6){//top-quarks
-      const  GenParticle* daughter1 = genpart.daughter(genparts, 1);
-      if((fabs(daughter1->pdgId())!=24)) daughter1 = genpart.daughter(genparts, 2);//W-bosons
-        if( (fabs(daughter1->pdgId())!=24)) cout << daughter1->daughter(genparts, 1)->pdgId() << endl;
-      if(daughter1->daughter(genparts, 1)){
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())>10 && fabs(daughter1->daughter(genparts, 1)->pdgId())<13){lept=true;}
-
-      if( fabs(daughter1->daughter(genparts, 1)->pdgId())<6){hadr = true;}
-      }
-    }
-  }
-  if(hadr && lept && !ehad) cout<< "diff" << endl;
-  if(!(hadr && lept) && ehad) cout<< "diff" << endl;
-  if(hadr && lept ) return true;
-
-  return false;
-  */
 }
 
 std::string SubstructureGeneratorPreSelectionElectron::description()
@@ -184,32 +92,6 @@ bool SubstructureGeneratorPreSelectionHadron::pass(BaseCycleContainer *bcc)
   if(sel) return true; 
   return false;
 
-  /*
-  // if(!bcc->topjetsgen){return false;}
-  std::vector<GenParticle>* genparts = bcc->genparticles;
-  int Ngenparts = genparts->size();
-
-  int hadr = 0;
- 
-  //look for semileptonic ttbar decays including electrons or muons
-  for(int l=0; l<Ngenparts ; l++){
-    GenParticle genpart = genparts->at(l);
-    if(genpart.status()<3){break;}
-    if( fabs(genpart.pdgId()) == 6){//top-quarks
-      const  GenParticle* daughter1 = genpart.daughter(genparts, 1);
-      if((fabs(daughter1->pdgId())!=24)) daughter1 = genpart.daughter(genparts, 2);//W-bosons
-   
-      if(daughter1->daughter(genparts, 1)){
-	if( fabs(daughter1->daughter(genparts, 1)->pdgId())<6){
-	  hadr++;
-	}
-      }
-    }
-  }
-  if(hadr == 2 ) return true;
-
-  return false;
-  */
 }
 
 std::string SubstructureGeneratorPreSelectionHadron::description()
@@ -242,30 +124,6 @@ bool GenLeptonSelection::pass(BaseCycleContainer *bcc)
 
   return sel; 
 
-  /*
-
- std::vector<GenParticle>* genparts = bcc->genparticles;
-  int Ngenparts = genparts->size();
-
-  bool lept = false; 
-  //look for semileptonic ttbar decays including electrons or muons
-  for(int l=0; l<Ngenparts ; l++){
-    GenParticle genpart = genparts->at(l);
-    if(genpart.status()<3){break;}
-    if( fabs(genpart.pdgId()) == 6){//top-quarks
-      const  GenParticle* daughter1 = genpart.daughter(genparts, 1);
-      if((fabs(daughter1->pdgId())!=24)) daughter1 = genpart.daughter(genparts, 2);//W-bosons
-      if(daughter1->daughter(genparts, 1)){
-	if(( fabs(daughter1->daughter(genparts, 1)->pdgId()) == 11 || fabs(daughter1->daughter(genparts, 1)->pdgId())== 13) && daughter1->daughter(genparts, 1)->pt()>m_pt_lep &&  daughter1->daughter(genparts, 1)->eta()<m_eta_max) {lept = true; break;}
-
- 	if(( fabs(daughter1->daughter(genparts, 2)->pdgId()) == 11 || fabs(daughter1->daughter(genparts, 2)->pdgId())== 13) && daughter1->daughter(genparts, 2)->pt()>m_pt_lep &&  daughter1->daughter(genparts, 2)->eta()<m_eta_max) lept = true;
-      }
-    }
-  }
- 
-
-  return lept;
-  */
 }
 
 std::string GenLeptonSelection::description()
