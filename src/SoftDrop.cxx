@@ -1,6 +1,6 @@
 #include "include/SoftDrop.h"
 #include "NtupleWriter/include/JetProps.h"
-#include "NtupleWriter/include/GenJetProps.h"
+#include "include/GenJetProps.h"
 #include <fastjet/JetDefinition.hh>
 #include <fastjet/PseudoJet.hh>
 #include <fastjet/ClusterSequence.hh>

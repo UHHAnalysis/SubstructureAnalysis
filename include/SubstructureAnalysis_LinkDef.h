@@ -12,7 +12,7 @@
 // want to generate a dictionary, here. The usual format is:
 //
 // #pragma link C++ class MySuperClass+;
-
+#pragma link C++ class GenJetProps+;
 #pragma link C++ class SubstructureCycle+;
 #pragma link C++ class SubstructurePreSelectionCycle+;
 #pragma link C++ class SubstructureJetHTPreSelectionCycle+;

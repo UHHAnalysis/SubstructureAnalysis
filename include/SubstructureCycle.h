@@ -4,7 +4,9 @@
 #define SubstructureCycle_H
 
 #include "SFrameAnalysis/include/AnalysisCycle.h"
-
+#include "SFrameAnalysis/include/Cleaner.h"
+#include "SFrameTools/include/HypothesisDiscriminator.h"
+#include "SFrameTools/include/HypothesisStatistics.h"
 /**
  *   @short Substructure of an analysis cycle
  *
@@ -43,9 +45,33 @@ public:
 private:
   //
   // Put all your private variables here
-  //
+  // 
+ bool m_reversed_electron_selection;
+
+  std::string m_Electron_Or_Muon_Selection;
+
+ bool m_mttgencut;
+
+  int m_Nbtags_max;
+  int m_Nbtags_min;  
+
+  bool m_veto_electron_trigger;
+  bool m_useORTriggerWithPFJet320;
+
+  Cleaner* m_cleaner;
+  Chi2Discriminator* m_chi2discr;
+  BestPossibleDiscriminator* m_bpdiscr;
+  SumDeltaRDiscriminator* m_sumdrdiscr;
+  CorrectMatchDiscriminator* m_cmdiscr;
+
+  HypothesisStatistics* m_bp_chi2;
+  HypothesisStatistics* m_bp_sumdr;
+  HypothesisStatistics* m_cm_chi2;
+  HypothesisStatistics* m_cm_sumdr; 
+  HypothesisStatistics* m_cm_bp; 
   
-   Selection* BSel, * NoBSel, *TopSel, *chi2_selection;
+  
+  Selection* BSelT, * NoBSel, *TopSel, *chi2_selection,* BSelM, * BSelL, *BSelT2, *BSel2M, *BSel2L;
 
   // Macro adding the functions for dictionary generation
   ClassDef( SubstructureCycle, 0 );

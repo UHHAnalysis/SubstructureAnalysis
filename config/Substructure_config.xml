@@ -42,6 +42,7 @@
 		   <Item Name="TopJetCollection" Value="goodPatJetsCATopTagPFPacked" />
 		   <Item Name="TopJetCollectionGen" Value="caTopTagGen" />
 		   <Item Name="GenParticleCollection" Value="GenParticles" /> 
+		   <Item Name="PFParticleCollection" Value="PFParticles" /> 
 		      
 		      <Item Name="PU_Filename_MC" Value="/nfs/dust/cms/user/peiffer/Analysis53X/PileUpHistos/PileUpHistoCycle" />
 		      <Item Name="PU_Filename_Data" Value="/nfs/dust/cms/user/peiffer/Analysis53X/PileUpHistos/MyDataPileupHistogram_206745.root" />
