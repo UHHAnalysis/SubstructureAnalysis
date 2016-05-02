@@ -3,7 +3,7 @@
 #include <iostream>
 
 using namespace std;
-
+#include "include/SubstructureCycle.h"
 
 #include "SFrameAnalysis/include/SelectionModules.h"
 #include "SFrameAnalysis/include/HypothesisHists.h"
