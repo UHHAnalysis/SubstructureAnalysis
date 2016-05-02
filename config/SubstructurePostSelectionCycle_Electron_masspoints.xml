@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd">
+
+<!--
+   <ConfigParse NEventsBreak="100000" LastBreak="0" FileSplit="0" />
+   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdir_PostSelection"/>
+-->
+
+
+<!-- <JobConfiguration JobName="SubstructureCycleJob" OutputLevel="VERBOSE"> -->
+<JobConfiguration JobName="SubstructureCycleJob" OutputLevel="INFO">
+  
+  <Library Name="libfastjet"/>
+  <Library Name="libfastjettools"/>
+  <Library Name="libSFramePlugIns"/>
+  <Library Name="libSFrameTools"/>
+  <Library Name="libAnalysis"/>
+  <Library Name="libNtuple"/>
+  <Library Name="libJetMETObjects"/>
+  <Library Name="libSubstructureAnalysis"/>
+  <Library Name="libMyAnalysis"/>
+  <Library Name="libZprimeAnalysis"/>
+
+
+  <Package Name="SubstructureAnalysis.par" />
+
+  <!--      <Cycle Name="SubstructureCycle" OutputDirectory="./gen/" PostFix="" TargetLumi="1" >  -->
+  <!--   <Cycle Name="PileupCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ca12electronPileup" PostFix="" TargetLumi="1" >-->
+
+     <Cycle Name="SubstructurePostSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/" PostFix="" TargetLumi="1.0">  
+ 
+ 
+
+
+		<InputData Lumi="253214" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass172.5_8TeV" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass172.5_8TeV.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+			<MetadataOutputTree Name="UnfoldingTree" />		  
+		</InputData> 
+
+
+		<InputData Lumi="111003" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass166.5_8TeV" Cacheable="False">
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass166.5_8TeV.root" Lumi="0.0"/> 
+                        <InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+      <MetadataOutputTree Name="UnfoldingTree" />		  
+		</InputData> 
+ 
+		<InputData Lumi="166607" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass169.5_8TeV" Cacheable="False">
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass169.5_8TeV.root" Lumi="0.0"/> 
+                        <InputTree Name="AnalysisTree" /> 
+	     <MetadataInputTree Name="SelectionTree" />
+        <MetadataOutputTree Name="UnfoldingTree" />
+		</InputData> 
+
+		<InputData Lumi="100305" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass171.5_8TeV" Cacheable="False">
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass171.5_8TeV.root" Lumi="0.0"/> 
+                        <InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+	        <MetadataOutputTree Name="UnfoldingTree" />
+		</InputData> 
+
+		<InputData Lumi="109062" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass173.5_8TeV" Cacheable="False">
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass173.5_8TeV.root" Lumi="0.0"/> 
+                        <InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+        <MetadataOutputTree Name="UnfoldingTree" />
+		</InputData> 
+
+		<InputData Lumi="164366" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass175.5_8TeV" Cacheable="False">
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass175.5_8TeV.root" Lumi="0.0"/> 
+                        <InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+       <MetadataOutputTree Name="UnfoldingTree" />
+		</InputData> 
+
+		<InputData Lumi="108838" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass178.5_8TeV" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass178.5_8TeV.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+     <MetadataInputTree Name="SelectionTree" />
+			<MetadataOutputTree Name="UnfoldingTree" />
+		</InputData>  
+
+
+		<InputData Lumi="27628219.9" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar_MCatNLO" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTbar_MCatNLO.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+                        <MetadataInputTree Name="SelectionTree" />
+			<MetadataOutputTree Name="UnfoldingTree" />
+		</InputData>  
+
+
+
+
+
+    <UserConfig>
+      <Item Name="Electron_Or_Muon_Selection" Value="Electron" />
+      <Item Name="ApplyMttbarGenCut" Value="True" />
+      <Item Name="DoMonitoring" Value="False" />
+
+      <Item Name="JetCollection" Value="goodPatJetsPFlow" />
+      <Item Name="ElectronCollection" Value="selectedPatElectronsPFlowLoose" />
+      <Item Name="MuonCollection" Value="selectedPatMuonsPFlowLoose" /> 
+      <Item Name="TauCollection" Value="selectedPatTausPFlow" />
+      <Item Name="GenJetCollection" Value="ak5GenJetsNoNu" />
+      <!--		   <Item Name="PhotonCollection" Value="patPhotons" /> -->
+      <Item Name="PrimaryVertexCollection" Value="goodOfflinePrimaryVertices" /> 
+      <Item Name="METName" Value="patMETsPFlow" />  
+      <Item Name="TopJetCollection" Value="goodPatJetsCA12TopTagPFPacked" />
+   <!--     <Item Name="TopTagJetCollection" Value="goodPatJetsCA15FilteredPFPacked" />
+      <Item Name="HiggsTagJetCollection" Value="goodPatJetsCAHEPTopTagPFPacked" />-->
+    <!--   <Item Name="TopJetCollectionGen" Value="caTopTagGen" />-->
+      <Item Name="GenJetCollectionWithParts" Value="ca12TopGenJetsNoNu" />
+      <Item Name="CAGenJetCollection" Value="ca12GenJetsNoNu" />
+      <Item Name="GenParticleCollection" Value="GenParticles" /> 
+      <Item Name="PFParticleCollection" Value="PFParticles" /> 
+      
+      <Item Name="PU_Filename_MC" Value="/nfs/dust/cms/user/dreyert/PileUpHistos2/PileUpHistoCycle" />
+      <Item Name="PU_Filename_Data" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/PileUpHistos/MyDataPileupHistogram.root" />
+      <Item Name="PU_Histname_Data" Value="pileup" />
+      <Item Name="PU_Histname_MC" Value="N_pileup_hist" />
+
+      <Item Name="writeTTbarReco" Value="False" />  
+      <Item Name="readTTbarReco" Value="False" /> 
+      
+      
+      <!-- to apply jet energy (re-)corrections (esp. updated ones since the gridding), use these lines: -->
+      <Item Name="JECFileLocation" Value="/nfs/dust/cms/user/peiffer/CMSSW_5_3_10/src" />
+      <Item Name="JECDataGlobalTag" Value="FT_53_V21_AN6" />
+      <Item Name="JECMCGlobalTag" Value="START53_V27" />
+      <Item Name="JECJetCollection" Value="AK5PFchs" />
+      <Item Name="JECTopJetCollection" Value="AK7PFchs" />
+      
+      <!-- this would perform systematic variations of the jet energy corrections in the down direction:
+	   <Item Name="SystematicUncertainty" Value="JEC" />
+	   <Item Name="SystematicVariation" Value="down" /> -->
+
+  <!--      <Item Name="LumiFilePath" Value="/nfs/dust/cms/user/missirol/Analysis53X/LumiFiles" />-->
+      <Item Name="LumiFilePath" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/LumiFiles" />
+      <Item Name="LumiFileName" Value="Ele30_pixel.root" />
+      <Item Name="LumiTrigger" Value="HLT_Ele30_CaloIdVT_TrkIdT_PFNoPUJet100_PFNoPUJet25_v" />
+
+       <Item Name="LeptonScaleFactors" Value="EGMTrigMVA 1" />
+       <Item Name="BTaggingScaleFactors" Value="default" />
+  <!--   <Item Name="TopTaggingScaleFactors" Value="default" />-->
+         <Item Name="applyEleORJetTriggerSF" Value="True" />
+      
+    </UserConfig>
+  </Cycle>
+</JobConfiguration>

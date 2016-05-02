@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd">
+
+<!-- <JobConfiguration JobName="SubstructureCycleJob" OutputLevel="VERBOSE"> -->
+<JobConfiguration JobName="SubstructureCycleJob" OutputLevel="INFO">
+  
+  <Library Name="libfastjet"/>
+  <Library Name="libfastjettools"/>
+  <Library Name="libSFramePlugIns"/>
+  <Library Name="libSFrameTools"/>
+  <Library Name="libAnalysis"/>
+  <Library Name="libNtuple"/>
+  <Library Name="libJetMETObjects"/>
+  <Library Name="libSubstructureAnalysis"/>
+  <Library Name="libMyAnalysis"/>
+  <Library Name="libZprimeAnalysis"/>
+
+  <Package Name="ZprimeAnalysis.par" />
+  <Package Name="SubstructureAnalysis.par" />
+
+   <Cycle Name="WSelectionCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/" PostFix="" TargetLumi="1" >
+  <!-- 
+   <Cycle Name="WSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/" PostFix="" TargetLumi="1" >
+-->
+
+
+<!--
+		<InputData Lumi="1.0" NEventsMax="-1"  Type="DATA" Version="DATA" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.DATA.DATA_A.root" Lumi="0.0"/>
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.DATA.DATA_B.root" Lumi="0.0"/> 
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.DATA.DATA_C.root" Lumi="0.0"/>
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.DATA.DATA_D.root" Lumi="0.0"/>
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+ -->
+<!--
+       <InputData Lumi="88185" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar" Cacheable="False">
+	 <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TT_powheg_test.root" Lumi="0.0"/> 
+	 <InputTree Name="AnalysisTree" /> 
+	 <OutputTree Name="AnalysisTree" />  
+	 <MetadataOutputTree Name="SelectionTree" />
+	</InputData>
+
+	<InputData Lumi="14493" NEventsMax="-1" Type="MC" Version="TTbar_700to1000" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TT_Mtt-700to1000.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData>
+	<InputData Lumi="5847.1" NEventsMax="-1" Type="MC" Version="TTbar_1000toInf" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TT_Mtt-1000toInf.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData> 
+-->
+<!--
+	<InputData Lumi="8828.62" NEventsMax="-1" Type="MC" Version="TT1000toInf_scaledown" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TTJets_powheg_mtt1000_scaledown.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData> 
+
+	<InputData Lumi="9128.04" NEventsMax="-1" Type="MC" Version="TT1000toInf_scaleup" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TTJets_powheg_mtt1000_scaleup.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData> 
+
+	<InputData Lumi="5321.77" NEventsMax="-1" Type="MC" Version="TT700to1000_scaledown" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TTJets_powheg_mtt700_scaledown.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData> 
+
+	<InputData Lumi="5051.46" NEventsMax="-1" Type="MC" Version="TT700to1000_scaleup" Cacheable="False">
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.TTJets_powheg_mtt700_scaleup.root" Lumi="0.0"/>
+	  <InputTree Name="AnalysisTree" />
+	  <OutputTree Name="AnalysisTree" />
+	  <MetadataOutputTree Name="SelectionTree" />
+	</InputData> 
+ -->
+	
+
+
+
+
+
+
+
+
+
+	        <InputData Lumi="66635" NEventsMax="-1" Type="MC" Version="SingleTop_T_tch" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_T_tch.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+	        <InputData Lumi="44834" NEventsMax="-1" Type="MC" Version="SingleTop_T_tWch" Cacheable="False">
+ 		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_T_tWch.root" Lumi="0.0"/>       
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+	        <InputData Lumi="68591" NEventsMax="-1" Type="MC" Version="SingleTop_T_sch" Cacheable="False">
+   		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_T_sch.root" Lumi="0.0"/>     
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+	        <InputData Lumi="63032" NEventsMax="-1" Type="MC" Version="SingleTop_Tbar_tch" Cacheable="False">
+   		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_Tbar_tch.root" Lumi="0.0"/>     
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+	        <InputData Lumi="44456" NEventsMax="-1" Type="MC" Version="SingleTop_Tbar_tWch" Cacheable="False">
+  		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_Tbar_tWch.root" Lumi="0.0"/>    
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+	        <InputData Lumi="79531" NEventsMax="-1" Type="MC" Version="SingleTop_Tbar_sch" Cacheable="False">
+ 		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.SingleTop_Tbar_sch.root" Lumi="0.0"/>     
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+
+
+
+
+
+		<InputData Lumi="3473.2" NEventsMax="-1" Type="MC" Version="W1Jets" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.W1Jets.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+		<InputData Lumi="15767" NEventsMax="-1" Type="MC" Version="W2Jets" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.W2Jets.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+		<InputData Lumi="24266" NEventsMax="-1" Type="MC" Version="W3Jets" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.W3Jets.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+
+		<InputData Lumi="50683" NEventsMax="-1" Type="MC" Version="W4Jets" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.W4Jets.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataOutputTree Name="SelectionTree" />
+		</InputData> 
+
+
+           <InputData Lumi="12.02" NEventsMax="-1" Type="MC" Version="QCD_Pt-20to30_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm20to30.root" Lumi="0.0"/> 
+             <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" /> 
+ 			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+           <InputData Lumi="7.168" NEventsMax="-1" Type="MC" Version="QCD_Pt-30to80_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm30to80.root" Lumi="0.0"/> 
+             <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" />  
+		 			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+           <InputData Lumi="188.45" NEventsMax="-1" Type="MC" Version="QCD_Pt-80to170_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm80to170.root" Lumi="0.0"/>             
+	     <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" />  
+			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+           <InputData Lumi="6910.9" NEventsMax="-1" Type="MC" Version="QCD_Pt-170to250_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm170to250.root" Lumi="0.0"/>
+             <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" /> 
+ 			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+           <InputData Lumi="62167" NEventsMax="-1" Type="MC" Version="QCD_Pt-250to350_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm250to350.root" Lumi="0.0"/>
+             <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" />
+  			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+           <InputData Lumi="382498" NEventsMax="-1" Type="MC" Version="QCD_Pt-350_EMEnriched" Cacheable="False">
+             <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructurePreSelectionCycle.MC.QCDEm350.root" Lumi="0.0"/> 
+             <InputTree Name="AnalysisTree" />
+			<OutputTree Name="AnalysisTree" />
+  			<MetadataOutputTree Name="SelectionTree" />
+           </InputData>
+
+
+
+    <UserConfig>
+
+	       <Item Name="Electron_Or_Muon_Selection" Value="Electron" />
+	       <Item Name="Nbtags_min" Value="0" />
+		   <!-- <Item Name="Nbtags_max" Value="0" /> -->
+
+	<Item Name="ApplyMttbarGenCut" Value="True" />
+	<Item Name="writeTTbarReco" Value="True" />
+	<Item Name="readTTbarReco" Value="False" />
+
+    	<Item Name="JetCollection" Value="goodPatJetsPFlow" />
+	<Item Name="GenJetCollection" Value="ak5GenJetsNoNu" />
+	<Item Name="ElectronCollection" Value="selectedPatElectronsPFlowLoose" />
+	<Item Name="MuonCollection" Value="selectedPatMuonsPFlowLoose" />
+	<Item Name="TauCollection" Value="selectedPatTausPFlow" />
+	<!-- <Item Name="PhotonCollection" Value="patPhotons" /> -->
+	<Item Name="PrimaryVertexCollection" Value="goodOfflinePrimaryVertices" />
+	<Item Name="METName" Value="patMETsPFlow" />
+	<!--	<Item Name="TopTagJetCollection" Value="goodPatJetsCATopTagPFPacked" />-->
+	<!--	<Item Name="HiggsTagJetCollection" Value="goodPatJetsCAHEPTopTagPFPacked" />-->
+	<!--	<Item Name="TopJetCollection" Value="goodPatJetsCA15FilteredPFPacked" />-->
+	<Item Name="TopJetCollection" Value="goodPatJetsCA12TopTagPFPacked" />
+	<!--		<Item Name="TopJetCollectionGen" Value="caTopTagGen" />-->
+	<Item Name="GenJetCollectionWithParts" Value="ca12TopGenJetsNoNu" />
+	<Item Name="CAGenJetCollection" Value="ca12GenJetsNoNu" /> 
+	<!-- <Item Name="PrunedJetCollection" Value="goodPatJetsCA8PrunedPF" /> -->
+	<Item Name="GenParticleCollection" Value="GenParticles" />
+	<Item Name="PFParticleCollection" Value="PFParticles" />
+
+	<Item Name="JECFileLocation" Value="/nfs/dust/cms/user/peiffer/CMSSW_5_3_10/src" />
+	<Item Name="JECDataGlobalTag" Value="FT_53_V21_AN6" />
+	<Item Name="JECMCGlobalTag" Value="START53_V27" />
+	<Item Name="JECJetCollection" Value="AK5PFchs" />
+
+	<Item Name="PU_Filename_MC" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/PileUpHistos/PileUpHistoCycle" />
+	<Item Name="PU_Filename_Data" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/PileUpHistos/MyDataPileupHistogram.root" />
+	<Item Name="PU_Histname_Data" Value="pileup" />
+	<Item Name="PU_Histname_MC" Value="N_pileup_hist" />
+
+	<!--		        <Item Name="LumiFilePath" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/LumiFiles" />
+	    <Item Name="LumiFileName" Value="Mu40.root" />
+	    <Item Name="LumiTrigger" Value="HLT_Mu40_eta2p1_v" />
+
+<Item Name="LeptonScaleFactors" Value="MuonRunABCD 1" />
+	-->
+
+	<Item Name="LumiFilePath" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/LumiFiles" />
+	<Item Name="LumiFileName" Value="Ele30_pixel.root" />
+	<Item Name="LumiTrigger" Value="HLT_Ele30_CaloIdVT_TrkIdT_PFNoPUJet100_PFNoPUJet25_v" />
+
+	<Item Name="LeptonScaleFactors" Value="EGMTrigMVA 1" />
+	<!--		<Item Name="BTaggingScaleFactors" Value="default" />
+	    <Item Name="TopTaggingScaleFactors" Value="default" />
+	    <Item Name="applyEleORJetTriggerSF" Value="True" />
+
+<Item Name="SystematicUncertainty" Value="JEC" />
+<Item Name="SystematicVariation" Value="down" />
+	-->
+	<Item Name="ReversedElectronSelection" Value="false" />
+      
+    </UserConfig>
+  </Cycle>
+</JobConfiguration>

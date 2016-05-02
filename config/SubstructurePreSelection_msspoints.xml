@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd"[
+<!ENTITY TT_powheg SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TT_powheg2.xml">
+<!ENTITY TT_madgraph SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass172.5_8TeV.xml">
+<!ENTITY TT_madgraph_166 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass166.5_8TeV.xml">
+<!ENTITY TT_madgraph_169 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass169.5_8TeV.xml">
+<!ENTITY TT_madgraph_171 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass171.5_8TeV.xml">
+<!ENTITY TT_madgraph_173 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass173.5_8TeV.xml">
+<!ENTITY TT_madgraph_175 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass175.5_8TeV.xml">
+<!ENTITY TT_madgraph_178 SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SFrameAnalysis/config/Samples_TTBSM53/TTJets_madgraph_mass178.5_8TeV.xml">
+
+
+<!ENTITY TTbar_MCatNLO SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SubstructureAnalysis/config/new_files/TT_MCatNLO_Herwig.xml">
+]>
+
+
+
+<!--
+   <ConfigParse NEventsBreak="0" LastBreak="0" FileSplit="15" />
+   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdir"/>
+-->
+
+
+<!-- <JobConfiguration JobName="GenCycleJob" OutputLevel="VERBOSE"> -->
+<JobConfiguration JobName="SubstructurePreSelectionCycleJob" OutputLevel="INFO">
+    
+	<Library Name="libfastjet"/>
+	<Library Name="libfastjettools"/>
+	<Library Name="libSFramePlugIns"/>
+	<Library Name="libSFrameTools"/>
+	<Library Name="libAnalysis"/>
+	<Library Name="libNtuple"/>
+	<Library Name="libJetMETObjects"/>
+	<Library Name="libSubstructureAnalysis"/>
+
+
+	<Package Name="SubstructureAnalysis.par" />
+
+<!--   <Cycle Name="SubstructurePreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/" PostFix="_1" TargetLumi="1" > -->
+	 
+  <!--	<Cycle Name="SubstructurePreSelectionCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/" PostFix="_2" TargetLumi="1" > -->
+  
+          <Cycle Name="SubstructurePreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/MuonPreSelection/" PostFix="" TargetLumi="1.0"> 
+
+
+<!--
+	<InputData Lumi="1" NEventsMax="-1" NEventsSkip="40000000" Type="MC" Version="TT_madgraph_172" Cacheable="True">
+                       &TT_madgraph;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+      <InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_166" Cacheable="True">
+                       &TT_madgraph_166;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_169" Cacheable="True">
+                       &TT_madgraph_169;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+
+
+                <InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_171" Cacheable="True">
+                       &TT_madgraph_171;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_173" Cacheable="True">
+                       &TT_madgraph_173;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_175" Cacheable="False">
+                       &TT_madgraph_175;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+-->
+
+<!--
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_178" Cacheable="False">
+                       &TT_madgraph_178;
+		       <InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" />  
+		</InputData>
+-->
+
+	       <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar_MCatNLO" Cacheable="False">
+		       &TTbar_MCatNLO;
+		       <InputTree Name="AnalysisTree" /> 
+		       <OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+
+		<UserConfig>
+
+           <Item Name="Electron_Or_Muon_Selection" Value="Muon" /> 
+	    <!--   <Item Name="Electron_Or_Muon_Selection" Value="Electron" /> -->
+	     <Item Name="ApplyTightRecoSelection" Value="True" />
+
+	     <Item Name="PFParticles" Value="PFParticles" />  
+	     <Item Name="JetCollection" Value="goodPatJetsPFlow" />
+	     <Item Name="ElectronCollection" Value="selectedPatElectronsPFlowLoose" />
+	     <Item Name="MuonCollection" Value="selectedPatMuonsPFlowLoose" /> 
+	     <Item Name="TauCollection" Value="selectedPatTausPFlow" />
+	     <Item Name="GenJetCollection" Value="ak5GenJetsNoNu" /> 
+	    <!--	               <Item Name="GenJetCollection" Value="ca15GenJetsNoNu" /> -->
+	   <!--		   <Item Name="PhotonCollection" Value="patPhotons" /> -->
+	   <Item Name="PrimaryVertexCollection" Value="goodOfflinePrimaryVertices" /> 
+	   <Item Name="METName" Value="patMETsPFlow" />  
+	   <Item Name="TopJetCollection" Value="goodPatJetsCA12TopTagPFPacked" />
+		    <!-- <Item Name="TopTagJetCollection" Value="goodPatJetsCATopTagPFPacked" />-->
+		   <!--	   <Item Name="TopTagJetCollection" Value="goodPatJetsCA15FilteredPFPacked" />-->
+		 <!-- 	   <Item Name="TopGenJetCollection" Value="ca12TopGenJetsNoNu" />  -->
+		 <Item Name="GenJetCollectionWithParts" Value="ca12TopGenJetsNoNu" />
+			 <!--   <Item Name="HiggsTagJetCollection" Value="goodPatJetsCA15FilteredPFPacked" />  -->
+		 <!--	   <Item Name="TopJetCollectionGen" Value="caTopTagGen" />-->
+		 <Item Name="CAGenJetCollection" Value="ca12GenJetsNoNu" />
+		 <Item Name="GenParticleCollection" Value="GenParticles" /> 
+		 <Item Name="PFParticleCollection" Value="PFParticles" /> 
+		      
+		 
+		   
+		   <!-- to apply jet energy (re-)corrections (esp. updated ones since the gridding), use these lines: -->
+		   <Item Name="JECFileLocation" Value="/nfs/dust/cms/user/peiffer/CMSSW_5_3_10/src" />
+		   <Item Name="JECDataGlobalTag" Value="FT_53_V21_AN6" />
+		   <Item Name="JECMCGlobalTag" Value="START53_V27" />
+		   <Item Name="JECJetCollection" Value="AK5PFchs" />
+
+		   <Item Name="ReversedElectronSelection" Value="false" />
+		   
+		   <!-- this would perform systematic variations of the jet energy corrections in the down direction:
+		   <Item Name="SystematicUncertainty" Value="JEC" />
+		   <Item Name="SystematicVariation" Value="down" /> -->
+
+		
+		      
+                </UserConfig>
+	</Cycle>
+</JobConfiguration>
