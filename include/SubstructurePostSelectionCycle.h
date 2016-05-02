@@ -6,7 +6,7 @@
 #include "SFrameAnalysis/include/AnalysisCycle.h"
 #include "SFrameAnalysis/include/Cleaner.h"
 
-#include "include/PileupHists.h"
+//#include "include/PileupHists.h"
 #include "include/TruthHists.h"
 #include "include/GroomingHists.h"
 #include "include/WHists.h"
