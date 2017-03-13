@@ -32,5 +32,5 @@ USERLDFLAGS +=  /nfs/dust/cms/user/dreyert/fastjet-install/lib/libfastjetplugins
 USERCXXFLAGS := -g 
 
 # Include the generic compilation rules
-include $(SFRAME_DIR)/Makefile.common
-
+#include $(SFRAME_DIR)/Makefile.common
+include $(SFRAME_DIR)/SFrameTools/Makefile.defs

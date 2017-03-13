@@ -10,16 +10,17 @@
 <JobConfiguration JobName="SubstructureCycleJob" OutputLevel="INFO">
 
   
-<Library Name="libfastjet"/>
-<Library Name="libfastjettools"/>
-<Library Name="libSFramePlugIns"/>
-<Library Name="libSFrameTools"/>
-<Library Name="libAnalysis"/>
-<Library Name="libNtuple"/>
-<Library Name="libJetMETObjects"/>
-<Library Name="libSubstructureAnalysis"/>
-<Library Name="libMyAnalysis"/>
-<Library Name="libZprimeAnalysis"/>
+
+  <Library Name="libfastjet"/>
+  <Library Name="libfastjettools"/>
+  <Library Name="libSFramePlugIns"/>
+  <Library Name="libSFrameTools"/>
+  <Library Name="libAnalysis"/>
+  <Library Name="libNtuple"/>
+  <Library Name="libJetMETObjects"/>
+  <Library Name="libSubstructureAnalysis"/>
+ 
+  <Library Name="libZprimeAnalysis"/>
 
 
 <Package Name="SubstructureAnalysis.par" />

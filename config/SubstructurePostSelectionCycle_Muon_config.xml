@@ -18,7 +18,7 @@
   <Library Name="libNtuple"/>
   <Library Name="libJetMETObjects"/>
   <Library Name="libSubstructureAnalysis"/>
-  <Library Name="libMyAnalysis"/>
+ <!---->
   <Library Name="libZprimeAnalysis"/>
 
 
