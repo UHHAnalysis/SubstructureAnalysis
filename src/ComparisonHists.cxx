@@ -69,6 +69,8 @@ void ComparisonHists::Init()
   Book( TH1F("dr","#DeltaR_{jet, top}",20,0,10));
   Book( TH1F("leading_plus_nearest_dr","#DeltaR(leading jet , nearest jet pt < 150}",20,0,10));
 
+  Book( TH1F("dr_2ndJet_bLep","#DeltaR_{b quark lept., 2nd jet}",100,0,10));
+
   Book( TH1F("dPhi_2ndjet_lepton", "#Delta#phi_{2nd jet, lepton}", 16, 0, 3.2)); 
 
   //boost cuts
@@ -78,17 +80,17 @@ void ComparisonHists::Init()
 
 
   //agles
-  Book( TH1F("eta1","#eta_{leading jet}",30,-3,3));
-  Book( TH1F("eta2","#eta_{2nd jet}",30,-3,3));
-  Book( TH1F("eta3","#eta_{3rd jet}",60,-6,6));
+  Book( TH1F("eta1","#eta_{leading jet}",60,-3,3));
+  Book( TH1F("eta2","#eta_{2nd jet}",60,-3,3));
+  Book( TH1F("eta3","#eta_{3rd jet}",120,-6,6));
 
-  Book( TH1F("eta1_WP","#eta_{leading jet} (genjetswithparts)",30,-3,3));
-  Book( TH1F("eta2_WP","#eta_{2nd jet} (genjetswithparts)",30,-3,3));
-  Book( TH1F("eta3_WP","#eta_{3rd jet} (genjetswithparts)",60,-6,6));
+  Book( TH1F("eta1_WP","#eta_{leading jet} (genjetswithparts)",60,-3,3));
+  Book( TH1F("eta2_WP","#eta_{2nd jet} (genjetswithparts)",60,-3,3));
+  Book( TH1F("eta3_WP","#eta_{3rd jet} (genjetswithparts)",120,-6,6));
 
-  Book( TH1F("eta4","#eta_{4th jet}",60,-6,6));
-  Book( TH1F("eta5","#eta_{5th jet}",60,-6,6));
-  Book( TH1F("eta_lep","#eta_{lepton}",30,-3,3));
+  Book( TH1F("eta4","#eta_{4th jet}",120,-6,6));
+  Book( TH1F("eta5","#eta_{5th jet}",120,-6,6));
+  Book( TH1F("eta_lep","#eta_{lepton}",60,-3,3));
 
   Book( TH1F("phi1","#phi_{leading jet}",40,-3.5,3.5));
   Book( TH1F("phi2","#phi_{2nd jet}",40,-3.5,3.5));
@@ -156,6 +158,8 @@ void ComparisonHists::Fill()
   GenParticle hadr_top;
   GenParticle lept_top;
 
+  GenParticle lept_bottom;
+
   GenParticle lepton;
 
 
@@ -167,6 +171,7 @@ void ComparisonHists::Fill()
     //int Ngenparts = genparts->size();
     if(ttbargen->DecayChannel() == TTbarGen::e_ehad || ttbargen->DecayChannel() == TTbarGen::e_muhad  ){
       hadr_top = ttbargen->TopHad();
+      lept_bottom = ttbargen->BLep();
       lept_top = ttbargen->TopLep();
       lepton = ttbargen->ChargedLepton();
     }
@@ -374,7 +379,7 @@ void ComparisonHists::Fill()
     Hist("dr_diff")->Fill(dr_diff,weight);
     Hist("leading_plus_nearest_dr")->Fill(dR_leading_nearest, weight);
 
-
+    Hist("dr_2ndJet_bLep")->Fill(deltaR(bcc->cagenjets->at(1).v4(),lept_bottom.v4()), weight);
 
     Hist("dPhi_2ndjet_lepton")->Fill(deltaPhiAbs(bcc->cagenjets->at(1).phi(),lepton.phi()), weight);
 

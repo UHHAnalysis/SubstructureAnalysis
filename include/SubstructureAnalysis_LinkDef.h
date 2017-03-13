@@ -22,6 +22,7 @@
 #pragma link C++ class WPostSelectionCycle+;
 #pragma link C++ class WCycle+;
 #pragma link C++ class WHists+;
+#pragma link C++ class PTHists+;
 //#pragma link C++ class testCycle+;
 #pragma link C++ class SubstructurePostSelectionCycle+;
 #pragma link C++ class GenCycle+;

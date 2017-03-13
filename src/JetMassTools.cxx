@@ -6,6 +6,33 @@
 #include <memory>
 
 
+void ScaleJetMass(double scale){
+
+    EventCalc* calc = EventCalc::Instance();
+    BaseCycleContainer *bcc = calc->GetBaseCycleContainer();
+
+    for(unsigned int i = 0; i<bcc->topjets->size();  i++){
+      double E = bcc->topjets->at(i).energy();
+      double mass = bcc->topjets->at(i).v4().mass();
+      bcc->topjets->at(i).set_energy(sqrt(pow(E,2)-(1-pow(scale,2))*pow(mass,2)));
+      //cout << "mass1:  " << mass << "  mass2:  " << bcc->topjets->at(i).v4().mass() << "  mass2/mass1:  " << bcc->topjets->at(i).v4().mass()/mass << endl ;
+    }
+
+   
+
+   //reset everything in EventCalc except the event weight
+    EventCalc* evc = EventCalc::Instance();
+    double weight = evc->GetWeight();
+    double recweight = evc->GetRecWeight();
+    double genweight = evc->GetGenWeight();
+    evc->Reset();
+    evc->ProduceWeight(weight);
+    evc->ProduceRecWeight(recweight);
+    evc->ProduceGenWeight(genweight);
+
+}
+
+
 //IsTagged(jet, btagtype)!!!!!!!!!!!
 std::vector<Jet> GetBJets( std::vector<Jet> jets , E_BtagType btagtype, double pt_min, double eta_max){
  std::vector<Jet> bjets; 
@@ -102,28 +129,35 @@ GenCleaner::GenCleaner( BaseCycleContainer* input)
 }
 
 GenCleaner::GenCleaner(){
-  EventCalc* calc = EventCalc::Instance();
+  calc = EventCalc::Instance();
   bcc = calc->GetBaseCycleContainer();
 }
 
 void GenCleaner::CAGenJetCleaner(double ptmin, double etamax){
 
     std::vector<Particle> cleaned_jets;
-    for(unsigned int i=0; i<bcc->cagenjets->size(); ++i){
-        Particle jet = bcc->cagenjets->at(i);
-        if(jet.pt()>ptmin) {
-            if(fabs(jet.eta())<etamax) {          
-	      cleaned_jets.push_back(jet);               
-            }
-        }
+    //  cout << "-----------------" << endl;
+    for(unsigned int i=0; i < bcc->cagenjets->size(); ++i){
+      //  cout << i << endl;
+      //  cout << bcc->cagenjets->size() << endl;
+      Particle jet = bcc->cagenjets->at(i);
+      //  cout << "++++++++++++++" << endl;
+      if(jet.pt()>ptmin) {
+	if(fabs(jet.eta())<etamax) {          
+	  cleaned_jets.push_back(jet);               
+	}
+      }
     }
-
+   
     bcc->cagenjets->clear();
-
+  
     for(unsigned int i=0; i<cleaned_jets.size(); ++i) {
-        bcc->cagenjets->push_back(cleaned_jets[i]);
+       bcc->cagenjets->push_back(cleaned_jets[i]);
     }
+
+    //cout <<"size: " << cleaned_jets.size() << endl;
     sort(bcc->cagenjets->begin(), bcc->cagenjets->end(), HigherPt());
+ 
     resetEventCalc();
 }
 
@@ -166,6 +200,25 @@ void GenCleaner::GenCaJetLeptonSubstractor( bool sort){
  
 
   if(bcc->cagenjets){
+
+    LorentzVector lepton1v4;
+    LorentzVector lepton2v4;
+    
+    /*
+    TTbarGen *ttbar = new TTbarGen(bcc);
+    //const GenParticle lepton;
+    if(ttbar->DecayChannel() == TTbarGen::e_ehad || ttbar->DecayChannel() == TTbarGen::e_muhad){
+      const GenParticle lepton = ttbar->ChargedLepton();
+      for(unsigned int i=0; i<bcc->cagenjets->size(); ++i) {
+	LorentzVector jet_v4 = bcc->cagenjets->at(i).v4();
+	if(deltaR(lepton.v4(),jet_v4)<1.2) jet_v4 -= lepton.v4();
+	lepton1v4 = lepton.v4();
+	bcc->cagenjets->at(i).set_v4(jet_v4);
+      }
+    }
+    */
+    //tested to give the same result for Pythia and Herwig samples!
+
     for(unsigned int i=0; i<bcc->cagenjets->size(); ++i) {
       LorentzVector jet_v4 = bcc->cagenjets->at(i).v4();
       std::vector<GenParticle>* genparts = bcc->genparticles;
@@ -174,10 +227,17 @@ void GenCleaner::GenCaJetLeptonSubstractor( bool sort){
 	if(fabs(genparts->at(j).pdgId()) == 11 || fabs(genparts->at(j).pdgId()) == 13 ){
 	  const GenParticle lepton = genparts->at(j);
 	  if(deltaR(lepton.v4(),jet_v4)<1.2) jet_v4 -= lepton.v4();
+	  lepton2v4 = lepton.v4();
+	  //  if(!(lepton1v4 == lepton2v4)){
+	  //   calc->PrintGenParticles();
+	  //}
 	}
       }
       bcc->cagenjets->at(i).set_v4(jet_v4);
     }
+    
+
+
   }
   
 

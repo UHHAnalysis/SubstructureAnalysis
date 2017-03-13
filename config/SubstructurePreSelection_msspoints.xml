@@ -11,13 +11,15 @@
 
 
 <!ENTITY TTbar_MCatNLO SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SubstructureAnalysis/config/new_files/TT_MCatNLO_Herwig.xml">
+<!ENTITY TTbar_madgraph_scaleup SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SubstructureAnalysis/config/new_files/TT_Madgraph_scaleup.xml">
+<!ENTITY TTbar_madgraph_scaledown SYSTEM "/afs/desy.de/user/d/dreyert/sframe/SubstructureAnalysis/config/new_files/TT_Madgraph_scaledown.xml">
 ]>
 
 
 
 <!--
    <ConfigParse NEventsBreak="0" LastBreak="0" FileSplit="15" />
-   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdir"/>
+   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdir_ElePre"/>
 -->
 
 
@@ -40,39 +42,39 @@
 	 
   <!--	<Cycle Name="SubstructurePreSelectionCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/" PostFix="_2" TargetLumi="1" > -->
   
-          <Cycle Name="SubstructurePreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/MuonPreSelection/" PostFix="" TargetLumi="1.0"> 
-
+          <Cycle Name="SubstructurePreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/" PostFix="" TargetLumi="1.0"> 
 
 <!--
-	<InputData Lumi="1" NEventsMax="-1" NEventsSkip="40000000" Type="MC" Version="TT_madgraph_172" Cacheable="True">
-                       &TT_madgraph;
-		       <InputTree Name="AnalysisTree" /> 
-			<OutputTree Name="AnalysisTree" />  
-		</InputData>
 
-      <InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_166" Cacheable="True">
-                       &TT_madgraph_166;
-		       <InputTree Name="AnalysisTree" /> 
-			<OutputTree Name="AnalysisTree" />  
-		</InputData>
+	    <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_172" Cacheable="False">
+              &TT_madgraph;
+	      <InputTree Name="AnalysisTree" /> 
+	      <OutputTree Name="AnalysisTree" />  
+	    </InputData>
 
-
-		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_169" Cacheable="True">
-                       &TT_madgraph_169;
-		       <InputTree Name="AnalysisTree" /> 
-			<OutputTree Name="AnalysisTree" />  
-		</InputData>
+	    <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_166" Cacheable="False">
+              &TT_madgraph_166;
+	      <InputTree Name="AnalysisTree" /> 
+	      <OutputTree Name="AnalysisTree" />  
+	    </InputData>
 
 
+	    <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_169" Cacheable="False">
+              &TT_madgraph_169;
+	      <InputTree Name="AnalysisTree" /> 
+	      <OutputTree Name="AnalysisTree" />  
+	    </InputData>
 
-                <InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_171" Cacheable="True">
-                       &TT_madgraph_171;
-		       <InputTree Name="AnalysisTree" /> 
-			<OutputTree Name="AnalysisTree" />  
-		</InputData>
 
 
-		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="20000000" Type="MC" Version="TT_madgraph_173" Cacheable="True">
+            <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_171" Cacheable="False">
+              &TT_madgraph_171;
+	      <InputTree Name="AnalysisTree" /> 
+	      <OutputTree Name="AnalysisTree" />  
+	    </InputData>
+
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_173" Cacheable="False">
                        &TT_madgraph_173;
 		       <InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
@@ -83,15 +85,15 @@
 		       <InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 		</InputData>
--->
 
-<!--
+
+
 		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TT_madgraph_178" Cacheable="False">
                        &TT_madgraph_178;
 		       <InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 		</InputData>
--->
+
 
 	       <InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar_MCatNLO" Cacheable="False">
 		       &TTbar_MCatNLO;
@@ -99,11 +101,25 @@
 		       <OutputTree Name="AnalysisTree" />  
 		</InputData>
 
+-->
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_scaledown" Cacheable="False">
+		  &TTbar_madgraph_scaledown;
+		  <InputTree Name="AnalysisTree" /> 
+		  <OutputTree Name="AnalysisTree" />  
+		</InputData>
+
+
+		<InputData Lumi="1" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_scaleup" Cacheable="False">
+		  &TTbar_madgraph_scaleup;
+		  <InputTree Name="AnalysisTree" /> 
+		  <OutputTree Name="AnalysisTree" />  
+		</InputData>
 
 		<UserConfig>
 
-           <Item Name="Electron_Or_Muon_Selection" Value="Muon" /> 
-	    <!--   <Item Name="Electron_Or_Muon_Selection" Value="Electron" /> -->
+         <!--    <Item Name="Electron_Or_Muon_Selection" Value="Muon" /> -->
+	     <Item Name="Electron_Or_Muon_Selection" Value="Electron" /> 
 	     <Item Name="ApplyTightRecoSelection" Value="True" />
 
 	     <Item Name="PFParticles" Value="PFParticles" />  
@@ -134,6 +150,7 @@
 		   <Item Name="JECDataGlobalTag" Value="FT_53_V21_AN6" />
 		   <Item Name="JECMCGlobalTag" Value="START53_V27" />
 		   <Item Name="JECJetCollection" Value="AK5PFchs" />
+		   <Item Name="JECTopJetCollection" Value="AK7PFchs" />
 
 		   <Item Name="ReversedElectronSelection" Value="false" />
 		   

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd">
 
- 
 <!--
-   <ConfigParse Version="-1" NEventsBreak="1" LastBreak="2" FileSplit="0" />
-   <ConfigSGE />
+   <ConfigParse NEventsBreak="100000" LastBreak="0" FileSplit="0" />
+   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdir_selectionHT"/>
 -->
 
 
@@ -25,7 +24,7 @@
 	<Package Name="SubstructureAnalysis.par" />
 <!--	<Cycle Name="ZprimeSelectionCycle"  RunMode="PROOF" ProofServer="lite://" ProofNodes="6"  ProofWorkDir="/nfs/dust/cms/user/YOURPATH" OutputDirectory="/nfs/dust/cms/user/YOURPATH" PostFix="" TargetLumi="1" >
 -->
-    <Cycle Name="SubstructureSelectionCycle"  OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/" PostFix="_JetHT" TargetLumi="1" > 
+    <Cycle Name="SubstructureSelectionCycle"  OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/JetHT/" PostFix="" TargetLumi="1" > 
  
  <!--	 <Cycle Name="SubstructureSelectionCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof/" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/" PostFix="_JetHT" TargetLumi="1" >   -->
 
@@ -35,10 +34,10 @@
 
 
 		<InputData Lumi="1.0" NEventsMax="-1"  Type="DATA" Version="DATA" Cacheable="False">
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructureJetHTPreSelectionCycle.DATA.DATA_A.root" Lumi="0.0"/>
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructureJetHTPreSelectionCycle.DATA.DATA_B.root" Lumi="0.0"/> 
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructureJetHTPreSelectionCycle.DATA.DATA_C.root" Lumi="0.0"/>
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/SubstructureJetHTPreSelectionCycle.DATA.DATA_D.root" Lumi="0.0"/>
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/SubstructureJetHTPreSelectionCycle.DATA.DATA_A.root" Lumi="0.0"/>
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/SubstructureJetHTPreSelectionCycle.DATA.DATA_B.root" Lumi="0.0"/> 
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/SubstructureJetHTPreSelectionCycle.DATA.DATA_C.root" Lumi="0.0"/>
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/SubstructureJetHTPreSelectionCycle.DATA.DATA_D.root" Lumi="0.0"/>
 			<InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 			<MetadataOutputTree Name="SelectionTree" />
@@ -52,7 +51,7 @@
                 <UserConfig>
 		
 		  <Item Name="Electron_Or_Muon_Selection" Value="Electron" />
-		  <Item Name="useORTriggerWithPFJet320" Value="True" />
+		  <Item Name="useORTriggerWithPFJet320" Value="False" />
 		  <Item Name="vetoElectronTrigger" Value="True" />
 
 		  <Item Name="Nbtags_min" Value="0" />
@@ -78,16 +77,21 @@
 		  <Item Name="JECDataGlobalTag" Value="FT_53_V21_AN6" />
 		  <Item Name="JECMCGlobalTag" Value="START53_V27" />
 		  <Item Name="JECJetCollection" Value="AK5PFchs" />
+		  <Item Name="JECTopJetCollection" Value="AK7PFchs" />
 
 		  <Item Name="PU_Filename_MC" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/PileUpHistos/PileUpHistoCycle" />
 		  <Item Name="PU_Filename_Data" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/PileUpHistos/MyDataPileupHistogram.root" />
 		  <Item Name="PU_Histname_Data" Value="pileup" />
 		  <Item Name="PU_Histname_MC" Value="N_pileup_hist" />
 
-
+<!--
 		  <Item Name="LumiFilePath" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/LumiFiles" />
 		  <Item Name="LumiFileName" Value="Ele30_pixel.root" />
-		  <Item Name="LumiTrigger" Value="HLT_Ele30_CaloIdVT_TrkIdT_PFNoPUJet100_PFNoPUJet25_v" />
+		  <Item Name="LumiTrigger" Value="HLT_Ele30_CaloIdVT_TrkIdT_PFNoPUJet100_PFNoPUJet25_v" />-->
+
+		  <Item Name="LumiFilePath" Value="/nfs/dust/cms/user/peiffer/Analysis53X_v3/LumiFiles" />
+		  <Item Name="LumiFileName" Value="PFJet320_pixel.root" />
+		  <Item Name="LumiTrigger" Value="HLT_PFJet320_v" />
 
 		  <Item Name="LeptonScaleFactors" Value="EGMTrigMVA 1" />
 		  <!--		<Item Name="BTaggingScaleFactors" Value="default" />

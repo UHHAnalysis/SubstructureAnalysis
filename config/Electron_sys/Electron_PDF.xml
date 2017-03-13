@@ -27,7 +27,7 @@
   <!--      <Cycle Name="SubstructureCycle" OutputDirectory="./gen/" PostFix="" TargetLumi="1" >  -->
    <!--   <Cycle Name="PileupCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ca12electronPileup" PostFix="" TargetLumi="1" >-->
 
-     <Cycle Name="SubstructurePostSelectionCycle"  RunMode="PROOF" ProofServer="lite://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" ProofNodes="12" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/PDF/MYPDFINDEX/" PostFix="" TargetLumi="1" >
+     <Cycle Name="SubstructurePostSelectionCycle"  RunMode="PROOF" ProofServer="lite://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" ProofNodes="12" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/November16/PDF/MYPDFINDEX/" PostFix="" TargetLumi="1" >
 
 <!--     <Cycle Name="SubstructurePostSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/PDF/MYPDFINDEX/" PostFix="" TargetLumi="1.0">   -->
 <!--
@@ -45,7 +45,7 @@
  
 
   <InputData Lumi="88185" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar" Cacheable="False">
-      <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTbar.root" Lumi="0.0"/>
+      <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTbar.root" Lumi="0.0"/>
       <InputTree Name="AnalysisTree" /> 
       <MetadataInputTree Name="SelectionTree" />
       <MetadataOutputTree Name="UnfoldingTree" />
@@ -53,13 +53,13 @@
 
 
  	<InputData Lumi="169478" NEventsMax="-1" Type="MC" Version="TTbar_700to1000" Cacheable="False">
-	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTbar_700to1000.root" Lumi="0.0"/>
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTbar_700to1000.root" Lumi="0.0"/>
 	  <InputTree Name="AnalysisTree" />
       <MetadataInputTree Name="SelectionTree" />
       <MetadataOutputTree Name="UnfoldingTree" />
 	</InputData>
 	<InputData Lumi="363114" NEventsMax="-1" Type="MC" Version="TTbar_1000toInf" Cacheable="False">
-	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTbar_1000toInf.root" Lumi="0.0"/>
+	  <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTbar_1000toInf.root" Lumi="0.0"/>
 	  <InputTree Name="AnalysisTree" />
       <MetadataInputTree Name="SelectionTree" />
 	  <MetadataOutputTree Name="UnfoldingTree" />

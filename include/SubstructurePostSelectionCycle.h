@@ -10,6 +10,7 @@
 #include "include/TruthHists.h"
 #include "include/GroomingHists.h"
 #include "include/WHists.h"
+#include "include/PTHists.h"
 #include "include/ComparisonHists.h"
 #include "include/ComparisonHistsReco.h"
 #include "include/JetMassTools.h"
@@ -66,8 +67,15 @@ private:
   bool m_groom_recojets;
   bool m_groom_genjets;
 
+  std::string m_mass_scale;
+
   std::string m_matching_gen;
   std::string m_matching_reco;
+
+  std::string m_trig_var;
+
+  std::string m_DecayChannel;
+  bool m_WritePTHists;
 
   int m_Nbtags_max;
   int m_Nbtags_min;

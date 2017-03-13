@@ -6,6 +6,7 @@ using namespace std;
 #include "include/SubstructurePostSelectionCycle.h"
 
 
+
 ClassImp( SubstructurePostSelectionCycle );
 
 
@@ -26,7 +27,13 @@ SubstructurePostSelectionCycle::SubstructurePostSelectionCycle()
   DeclareProperty( "Electron_Or_Muon_Selection", m_Electron_Or_Muon_Selection );
   DeclareProperty( "BTaggingScaleFactors", m_dobsf );
 
+  m_DecayChannel = "All";
+  DeclareProperty("DecayChannel" , m_DecayChannel);
+
   x_btagtype = e_CSVT;
+
+  m_WritePTHists = false;
+  DeclareProperty("WritePTHists", m_WritePTHists);
 
   //default: no btagging cuts applied, other cuts can be defined in config file
   m_Nbtags_min=0;
@@ -37,6 +44,8 @@ SubstructurePostSelectionCycle::SubstructurePostSelectionCycle()
   // apply SF for the "Ele30 OR PFJet320" trigger (electron channel)
   m_applyEleORJetTriggerSF = false;
   DeclareProperty( "applyEleORJetTriggerSF", m_applyEleORJetTriggerSF);
+  m_trig_var = "none";
+  DeclareProperty("EleORJetTriggerVariation", m_trig_var);
 
   //set grooming hists (should be renamed)
   m_monitoring = false;
@@ -57,6 +66,9 @@ SubstructurePostSelectionCycle::SubstructurePostSelectionCycle()
 
   m_matching_reco = "None";
   DeclareProperty("RecoMatching", m_matching_reco);
+
+  m_mass_scale = "Default";
+  DeclareProperty("MassScale", m_mass_scale);
 }
 
 SubstructurePostSelectionCycle::~SubstructurePostSelectionCycle() 
@@ -141,6 +153,12 @@ void SubstructurePostSelectionCycle::BeginInputData( const SInputData& id ) thro
   RegisterSelection(HTlep_selection);
 
 
+  //only for checks in the muon channel 
+  Selection* LeptonSelection = new Selection("LeptonSelection");
+  LeptonSelection->addSelectionModule(new GenLeptonSelection(45,2.1));
+  RegisterSelection(LeptonSelection);
+
+
   //===============================
   //post selections on gen level
   //===============================
@@ -220,8 +238,12 @@ void SubstructurePostSelectionCycle::BeginInputData( const SInputData& id ) thro
   RegisterSelection(GenMassSelectionLeptonAndNeutrino);
 
   //matching 
+  // GenMatchedSelection = new Selection("GenMatchedSelection"); 
+  //  GenMatchedSelection->addSelectionModule(new GenCAJetMatchedSelection(1.2, "LeptonPlusJets"));
+  //  RegisterSelection(GenMatchedSelection);
+
   GenMatchedSelection = new Selection("GenMatchedSelection"); 
-  GenMatchedSelection->addSelectionModule(new GenCAJetMatchedSelection(1.2, "LeptonPlusJets"));
+  GenMatchedSelection->addSelectionModule(new GenCAJetFullyMergedSelection(1.2));
   RegisterSelection(GenMatchedSelection);
 
   GenMatchedSelectionHadron = new Selection("GenMatchedSelectionHadron"); 
@@ -238,8 +260,8 @@ void SubstructurePostSelectionCycle::BeginInputData( const SInputData& id ) thro
   RegisterSelection(BSelT);
 
   RecoLeptonSelection = new Selection("RecoLeptonSelection");
-  if(doEle) RecoLeptonSelection->addSelectionModule(new NElectronSelection(1,int_infinity(), 45 , 2.5));
-  if(doMu) RecoLeptonSelection->addSelectionModule(new NMuonSelection(1,int_infinity(), 45 , 2.5));
+  if(doEle) RecoLeptonSelection->addSelectionModule(new NElectronSelection(1,int_infinity(), 45 , 2.1));
+  if(doMu) RecoLeptonSelection->addSelectionModule(new NMuonSelection(1,int_infinity(), 45 , 2.1));
   RegisterSelection(RecoLeptonSelection);
 
   TopJetSelection_400_150 = new Selection("TopJetSelection_400_150");
@@ -322,7 +344,7 @@ void SubstructurePostSelectionCycle::BeginInputData( const SInputData& id ) thro
   RegisterHistCollection( Hists_gen_v100 = new ComparisonHists("gen_v100") );
 
   RegisterHistCollection( Hists_gen_recgen = new ComparisonHists("gen_recgen") );
-  RegisterHistCollection( Hists_gen_recgen_NOdr = new ComparisonHists("gen_recgen") );
+  RegisterHistCollection( Hists_gen_recgen_NOdr = new ComparisonHists("gen_recgen_NOdr") );
  
  
   RegisterHistCollection( Hists_gen_rec_sel = new ComparisonHists("gen_rec_sel") );
@@ -365,6 +387,12 @@ void SubstructurePostSelectionCycle::BeginInputData( const SInputData& id ) thro
   RegisterHistCollection( Hists_jet = new JetHists("jet_fullselection") ) ;
   RegisterHistCollection( Hists_event_basic = new EventHists("event_basicselection") ); 
   RegisterHistCollection( Hists_jet_basic = new JetHists("jet_basicselection") ) ;
+
+  //PTHists
+  if(m_WritePTHists){  
+    RegisterHistCollection(new PTHists("pt_distributions") ) ;
+  }
+
 
   // important: initialise histogram collections after their definition
   InitHistos();
@@ -435,14 +463,17 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 
   // first step: call Execute event of base class to perform basic consistency checks
   // also, the good-run selection is performed there and the calculator is reset
+
   AnalysisCycle::ExecuteEvent( id, weight );
 
- 
+
   m_intree->GetEvent(id.GetEventTreeEntry());  //get input tree with basic selections
   SetDefaults();                                //set default values for all private members
 
   EventCalc* calc = EventCalc::Instance();
   BaseCycleContainer* bcc = calc->GetBaseCycleContainer();
+
+  static Selection* LeptonSelection = GetSelection("LeptonSelection");
 
   if(calc->GetJets()->size()>=12){
     std::cout << "run: " << calc->GetRunNum() << "   lb: " << calc->GetLumiBlock() << "  event: " << calc->GetEventNum() << "   N(jets): " << calc->GetJets()->size() << std::endl;
@@ -467,12 +498,13 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 
   // Ele30_OR_PFJet320 trigger Scale Factor
   if(m_applyEleORJetTriggerSF && !calc->IsRealData() && calc->GetJets()->size()){
-    calc->ProduceWeight( m_lsf->GetElectronORJetTrigWeight() );
-    calc->ProduceRecWeight( m_lsf->GetElectronORJetTrigWeight() );
+    calc->ProduceWeight( m_lsf->GetElectronORJetTrigWeight(m_trig_var) );
+    calc->ProduceRecWeight( m_lsf->GetElectronORJetTrigWeight(m_trig_var) );
   }
 
   m_cleaner = new Cleaner();
   m_cleaner->SetJECUncertainty(m_jes_unc);
+
 
   // settings for jet correction uncertainties
   if (m_sys_unc==e_JEC){
@@ -488,13 +520,25 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
     }
   }
 
+
+  if(m_mass_scale == "up") ScaleJetMass(1.015);
+  if(m_mass_scale == "down") ScaleJetMass(0.985);
+
+
   //if(!bcc->isRealData && bcc->jets) m_cleaner->JetEnergyResolutionShifter();
   if(!bcc->isRealData && bcc->jets) m_cleaner->JetEnergyResolutionShifterFat();
+
+  //  GenCleaner gen_cleaner;
+  //if(bcc->topjets) m_cleaner->TopJetCleaner(50,2.5,false);
+  //if(!bcc->isRealData && m_gen_presel && bcc->cagenjets) gen_cleaner.CAGenJetCleaner(50,2.5);
+
+
   // delete m_cleaner;
 
 
   //std::sort(bcc->topjets->begin(), bcc->topjets->end(), HigherPt()); //sort after resolution shifts
 
+ 
   //===========================================
   //gen level selections
   //===========================================
@@ -502,6 +546,27 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
   //============ hadronic selection =========== 
   if(id.GetVersion().Contains("TTbar"))
     {
+      //decay channel selection 
+      if(!(m_DecayChannel == "All") ){
+	TTbarGen *ttbar = new TTbarGen(bcc);
+	if(m_DecayChannel == "emujets" && !(ttbar->DecayChannel() == TTbarGen::e_ehad || ttbar->DecayChannel() == TTbarGen::e_muhad)) 
+	  throw SError( SError::SkipEvent );
+	if(m_DecayChannel == "taujets" && !(ttbar->DecayChannel() == TTbarGen::e_tauhad) ){ 
+	  throw SError( SError::SkipEvent );
+	  cout << m_DecayChannel <<endl;
+	}
+	if(m_DecayChannel == "hadronic" && !(ttbar->DecayChannel() == TTbarGen::e_had) ) 
+	  throw SError( SError::SkipEvent );
+	if(m_DecayChannel == "dilepton" && !(ttbar->DecayChannel() == TTbarGen::e_ee || ttbar->DecayChannel() == TTbarGen::e_mumu || ttbar->DecayChannel() == TTbarGen::e_tautau || ttbar->DecayChannel() == TTbarGen::e_emu || ttbar->DecayChannel() == TTbarGen::e_etau || ttbar->DecayChannel() == TTbarGen::e_mutau))
+	  throw SError( SError::SkipEvent );
+	if(m_DecayChannel == "rest" &&  (ttbar->DecayChannel() == TTbarGen::e_ehad || ttbar->DecayChannel() == TTbarGen::e_muhad) ) 
+	  throw SError( SError::SkipEvent );
+
+	// 	cout << ttbar->DecayChannel() << " "<< TTbarGen::e_tauhad<< endl;
+	//cout <<  (ttbar->DecayChannel() == TTbarGen::e_tauhad) << endl;
+	//cout <<	(m_DecayChannel == "taujets") << endl;
+	delete ttbar;
+      }
 
       //matching 
       bool matched = true;
@@ -517,7 +582,7 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 	  if(GenMassSelection->passSelection()) Hists_hadronic_gen_mass->Fill();
 	}
     }
-  
+
   //============ lepton + jets selection =======
   if(geninfo)
     {
@@ -527,15 +592,14 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
      
 
       //plot presel
-      if(m_gen_presel)
+      if(m_gen_presel && bcc->cagenjets->size()>1)
 	{
 	  if(m_matching_gen == "Matched" && !GenMatchedSelection->passSelection()) matched = false;
 	  if(m_matching_gen == "MisMatched" && !GenMatchedSelection->passInvertedSelection() ) matched = false;
 	  Hists_gen_presel->Fill();
 	}
-    
       // basic selections (all selections will be saved in the output tree)  
-      if(m_gensel_basic && matched)
+      if(m_gensel_basic && matched && GenJetSelection_300_100->passSelection())
 	{
 	  /*
 	  int NLep = 0;
@@ -578,7 +642,7 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 	  if(GenMassSelectionLepton->passSelection()) m_gen_mass_sel2 = true;
 	  if(GenMassSelectionLeptonAndNeutrino->passSelection()) m_gen_mass_sel3 = true;
 	}
-
+    
       //main selection!!!
       if(m_gensel_400_100 && m_gensel_basic)
 	{
@@ -622,7 +686,6 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
   
     }//geninfo
 
-  
   //===========================================
   //reco level selections
   //===========================================
@@ -639,7 +702,8 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
   if( HTlep_selection->passSelection() 
       && m_recsel_basic
       && BSelT->passSelection()
-      && matched)
+      && matched
+      && calc->GetCAJets()->size()>1)
     {
       //grooming 
       if(m_groom_recojets) SoftDropNTopJets(3);
@@ -647,7 +711,6 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
       Hists_jet_basic->Fill();
       Hists_event_basic->Fill();
       Hists_reco_basic->Fill();
-
       //===========================additional selections==========================
       //first selection step includes pt_leading > 300 GeV, pt_2nd > 100 GeV and no veto. All events passing this selection are stored in the output tree 
       if(TopJetSelection_300_100->passSelection() && RecoLeptonSelection->passSelection())
@@ -662,6 +725,10 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 	     && BoostedRecoSelection->passSelection()
 	     && RecoMassSelection->passSelection())
 	    { 
+	      if(m_WritePTHists && m_recosel_300_150) {
+	      	BaseHists* Hists_PT = GetHistCollection("pt_distributions");
+		Hists_PT->Fill();
+	      }
 	      if(m_recosel_300_150 && !TopJetSelection_400_150->passSelection()) 
 		Hists_reco_mass_300to400->Fill();
 	      if(TopJetSelection_400_150->passSelection() && !TopJetSelection_500_150->passSelection())
@@ -677,7 +744,6 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 	  if(RecoMassSelection->passSelection()) m_reco_mass_sel = true;
 	  if(RecoMassSelectionLepton->passSelection()) m_reco_mass_sel2 = true;
 	  if(RecoJetVeto->passSelection()) m_reco_jet_veto = true;
-	 
 	  //=================main selection====================
 	  if(TopJetSelection_400_150->passSelection() && RecoJetVeto->passSelection())  //pt_leading > 400 GeV, pt_2nd > 150 GeV, veto
 	    {    
@@ -706,7 +772,7 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 		  if(m_monitoring) Hists_grooming->Fill();
 		  Hists_jet->Fill();
 		  Hists_event->Fill();
-		
+  
 		  if(geninfo){
 		
 		    if(m_gensel)
@@ -714,7 +780,7 @@ void SubstructurePostSelectionCycle::ExecuteEvent( const SInputData& id, Double_
 			Hists_gen_recgen->Fill();
 			Hists_reco_recgen->Fill();
 		      }
-		    else Hists_gen_rec_notgen_sel->Fill();			  
+		    else if(bcc->cagenjets->size()>1) Hists_gen_rec_notgen_sel->Fill();			  
  
 		    //if(!ttbar->IsTopHadronicDecay() && !ttbar->IsTopHadronicDecay()) 
 		    //Hists_reco_rec_notgen_sel_dilept->Fill();

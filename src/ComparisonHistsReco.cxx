@@ -63,12 +63,12 @@ void ComparisonHistsReco::Init()
   
 
   //agles
-  Book( TH1F("eta1","#eta_{leading jet}",30,-3,3));
-  Book( TH1F("eta2","#eta_{2nd jet}",30,-3,3));
-  Book( TH1F("eta3","#eta_{3rd jet}",60,-6,6));
-  Book( TH1F("eta4","#eta_{4th jet}",60,-6,6));
-  Book( TH1F("eta5","#eta_{5th jet}",60,-6,6));
-  Book( TH1F("eta_lep","#eta_{lepton}",30,-3,3));
+  Book( TH1F("eta1","#eta_{leading jet}",60,-3,3));
+  Book( TH1F("eta2","#eta_{2nd jet}",60,-3,3));
+  Book( TH1F("eta3","#eta_{3rd jet}",120,-6,6));
+  Book( TH1F("eta4","#eta_{4th jet}",120,-6,6));
+  Book( TH1F("eta5","#eta_{5th jet}",120,-6,6));
+  Book( TH1F("eta_lep","#eta_{lepton}",60,-3,3));
 
   Book( TH1F("phi1","#phi_{leading jet}",40,-3.5,3.5));
   Book( TH1F("phi2","#phi_{2nd jet}",40,-3.5,3.5));
@@ -213,7 +213,7 @@ void ComparisonHistsReco::Fill()
 
  
     //scatter plots
-    if(geninfo){
+    if(geninfo && bcc->cagenjets){
       if(bcc->cagenjets->size()>1){
 	bool gen_newsel1 = false;
 	bool gen_newsel2 = false;
@@ -272,10 +272,10 @@ void ComparisonHistsReco::Finish()
 {
   // final calculations, like division and addition of certain histograms
   /* EventCalc* calc = EventCalc::Instance();
-  bool IsRealData = calc->IsRealData();
-  if (IsRealData){
+     bool IsRealData = calc->IsRealData();
+     if (IsRealData){
     
-  }
+     }
   */
 }
 

@@ -51,6 +51,7 @@ class GenCleaner{
   void CAGenJetCleaner(double ptmin, double etamax);
 
  private:
+  EventCalc* calc;
   BaseCycleContainer* bcc;
   void resetEventCalc();
  
@@ -65,7 +66,7 @@ fastjet::PseudoJet FilterJet(fastjet::PseudoJet injet, std::vector<PFParticle>* 
 void SoftDropNTopJets(unsigned int Njets);
 void SoftDropNGenJetsWithParts(unsigned int Njets);
 void TrimmNTopJets(unsigned int Njets);
-
+void ScaleJetMass(double scale);
 std::vector<Jet> GetBJets( std::vector<Jet> jets, E_BtagType btagtype, double pt_min, double eta_max);
 std::vector<Jet> GetNOBJets( std::vector<Jet> jets, E_BtagType btagtype, double pt_min, double eta_max);
 

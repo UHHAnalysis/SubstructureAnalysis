@@ -265,6 +265,19 @@ class GenCAJetMatchedSelection: public SelectionModule {
   TString m_channel;
 };
 
+class GenCAJetFullyMergedSelection: public SelectionModule {
+ public:
+  GenCAJetFullyMergedSelection( double dR_max); 
+  ~GenCAJetFullyMergedSelection(){};
+
+  virtual bool pass(BaseCycleContainer*);
+  virtual std::string description();
+
+ private:
+  double m_dR_max;
+  TString m_channel;
+};
+
 class TopJetMatchedSelection: public SelectionModule {
  public:
   TopJetMatchedSelection( double dR_max); 

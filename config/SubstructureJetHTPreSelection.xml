@@ -66,7 +66,10 @@
 ]>
 
 
-
+<!--
+   <ConfigParse NEventsBreak="0" LastBreak="0" FileSplit="15" />
+   <ConfigSGE RAM ="2" DISK ="2" Mail="torben.dreyer@desy.de" Notification="as" Workdir="/nfs/dust/cms/user/dreyert/SFrameBatch/workdirHTPre"/>
+-->
 
 
 
@@ -85,33 +88,34 @@
 
 	<Package Name="SubstructureAnalysis.par" />
 
-  <!--	 <Cycle Name="SubstructureJetHTPreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/" PostFix="" TargetLumi="1" >  -->
+  	 <Cycle Name="SubstructureJetHTPreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/November16/" PostFix="" TargetLumi="1" > 
+<!--
 	  <Cycle Name="SubstructureJetHTPreSelectionCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPreSelection/" PostFix="" TargetLumi="1" >
-
+-->
   
     <!--         <Cycle Name="GenPreSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ca12electron1" PostFix="" TargetLumi="1.0">  -->
- <!--  
+   
 
-              <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_A" Cacheable="True">
+              <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_A" Cacheable="False">
                         &JetHTDataA;
 			<InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 		</InputData>
 
-                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_B" Cacheable="True">
+                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_B" Cacheable="False">
                         &JetHTDataB;
 			<InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 		</InputData> 
--->
-<!--
-                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_C" Cacheable="True">
+
+
+                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_C" Cacheable="False">
                         &JetHTDataC;
 			<InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  
 		</InputData> 
- -->
-                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_D" Cacheable="True">
+ 
+                <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="DATA_D" Cacheable="False">
                          &JetHTDataD;
 			<InputTree Name="AnalysisTree" /> 
 			<OutputTree Name="AnalysisTree" />  

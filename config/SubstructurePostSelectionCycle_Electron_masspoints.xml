@@ -27,13 +27,13 @@
   <!--      <Cycle Name="SubstructureCycle" OutputDirectory="./gen/" PostFix="" TargetLumi="1" >  -->
   <!--   <Cycle Name="PileupCycle"  RunMode="PROOF" ProofServer="PoD://"  ProofWorkDir="/nfs/dust/cms/user/dreyert/proof" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ca12electronPileup" PostFix="" TargetLumi="1" >-->
 
-     <Cycle Name="SubstructurePostSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/" PostFix="" TargetLumi="1.0">  
+     <Cycle Name="SubstructurePostSelectionCycle" OutputDirectory="/nfs/dust/cms/user/dreyert/Jetmass/ElectronPostSelection/November16/" PostFix="" TargetLumi="1.0">  
  
  
 
 
 		<InputData Lumi="253214" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass172.5_8TeV" Cacheable="False">
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass172.5_8TeV.root" Lumi="0.0"/> 
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass172.5_8TeV.root" Lumi="0.0"/> 
 			<InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
 			<MetadataOutputTree Name="UnfoldingTree" />		  
@@ -41,42 +41,42 @@
 
 
 		<InputData Lumi="111003" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass166.5_8TeV" Cacheable="False">
-                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass166.5_8TeV.root" Lumi="0.0"/> 
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass166.5_8TeV.root" Lumi="0.0"/> 
                         <InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
       <MetadataOutputTree Name="UnfoldingTree" />		  
 		</InputData> 
  
 		<InputData Lumi="166607" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass169.5_8TeV" Cacheable="False">
-                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass169.5_8TeV.root" Lumi="0.0"/> 
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass169.5_8TeV.root" Lumi="0.0"/> 
                         <InputTree Name="AnalysisTree" /> 
 	     <MetadataInputTree Name="SelectionTree" />
         <MetadataOutputTree Name="UnfoldingTree" />
 		</InputData> 
 
 		<InputData Lumi="100305" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass171.5_8TeV" Cacheable="False">
-                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass171.5_8TeV.root" Lumi="0.0"/> 
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass171.5_8TeV.root" Lumi="0.0"/> 
                         <InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
 	        <MetadataOutputTree Name="UnfoldingTree" />
 		</InputData> 
 
 		<InputData Lumi="109062" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass173.5_8TeV" Cacheable="False">
-                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass173.5_8TeV.root" Lumi="0.0"/> 
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass173.5_8TeV.root" Lumi="0.0"/> 
                         <InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
         <MetadataOutputTree Name="UnfoldingTree" />
 		</InputData> 
 
 		<InputData Lumi="164366" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass175.5_8TeV" Cacheable="False">
-                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass175.5_8TeV.root" Lumi="0.0"/> 
+                        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass175.5_8TeV.root" Lumi="0.0"/> 
                         <InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
        <MetadataOutputTree Name="UnfoldingTree" />
 		</InputData> 
 
 		<InputData Lumi="108838" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_mass178.5_8TeV" Cacheable="False">
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTJets_madgraph_mass178.5_8TeV.root" Lumi="0.0"/> 
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_mass178.5_8TeV.root" Lumi="0.0"/> 
 			<InputTree Name="AnalysisTree" /> 
      <MetadataInputTree Name="SelectionTree" />
 			<MetadataOutputTree Name="UnfoldingTree" />
@@ -84,19 +84,33 @@
 
 
 		<InputData Lumi="27628219.9" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTbar_MCatNLO" Cacheable="False">
-		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/SubstructureSelectionCycle.MC.TTbar_MCatNLO.root" Lumi="0.0"/> 
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTbar_MCatNLO.root" Lumi="0.0"/> 
 			<InputTree Name="AnalysisTree" /> 
                         <MetadataInputTree Name="SelectionTree" />
 			<MetadataOutputTree Name="UnfoldingTree" />
 		</InputData>  
 
 
+                <InputData Lumi="170497.4" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_scaleup" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_scaleup.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataInputTree Name="SelectionTree" />
+			<MetadataOutputTree Name="UnfoldingTree" />
+		</InputData>  
 
+		<InputData Lumi="159831.8" NEventsMax="-1" NEventsSkip="0" Type="MC" Version="TTJets_madgraph_scaledown" Cacheable="False">
+		        <In FileName="/nfs/dust/cms/user/dreyert/Jetmass/ElectronSelection/November16/SubstructureSelectionCycle.MC.TTJets_madgraph_scaledown.root" Lumi="0.0"/> 
+			<InputTree Name="AnalysisTree" /> 
+			<OutputTree Name="AnalysisTree" /> 
+			<MetadataInputTree Name="SelectionTree" />
+			<MetadataOutputTree Name="UnfoldingTree" />
+		</InputData>  
 
 
     <UserConfig>
       <Item Name="Electron_Or_Muon_Selection" Value="Electron" />
-      <Item Name="ApplyMttbarGenCut" Value="True" />
+      <Item Name="ApplyMttbarGenCut" Value="False" />
       <Item Name="DoMonitoring" Value="False" />
 
       <Item Name="JetCollection" Value="goodPatJetsPFlow" />

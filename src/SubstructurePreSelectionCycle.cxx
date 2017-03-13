@@ -167,6 +167,10 @@ void SubstructurePreSelectionCycle::ExecuteEvent( const SInputData& id, Double_t
   for(unsigned int i=0; i<bcc->jets->size(); ++i) {
     uncleaned_jets.push_back(bcc->jets->at(i));
   }
+  std::vector<TopJet> uncleaned_topjets;
+  for(unsigned int i=0; i<bcc->topjets->size(); ++i) {
+    uncleaned_topjets.push_back(bcc->topjets->at(i));
+  }
   MET uncleaned_met = *bcc->met;
  
   //clean collections here
@@ -176,6 +180,7 @@ void SubstructurePreSelectionCycle::ExecuteEvent( const SInputData& id, Double_t
   if(bcc->jets) cleaner.JetLeptonSubtractor(m_corrector,false);
   if(!bcc->isRealData && bcc->jets) cleaner.JetEnergyResolutionShifter();
   if(bcc->jets) cleaner.JetCleaner(30,2.5,true);
+  if(!bcc->isRealData && bcc->jets) cleaner.JetEnergyResolutionShifterFat();
   //if(!bcc->isRealData && bcc->cagenjets) gen_cleaner.CAGenJetCleaner(50,2.5);
 
   // -------------------------------------------------------------------------
@@ -185,23 +190,25 @@ void SubstructurePreSelectionCycle::ExecuteEvent( const SInputData& id, Double_t
   m_gen_presel = false;
   m_gen_presel_hadron = false;
 
-  if(id.GetVersion().Contains("TT_powheg") || id.GetVersion().Contains("TT_Mtt"))
-    m_gen_presel_hadron = genpreselection_hadron->passSelection();
+ if(m_Electron_Or_Muon_Selection=="Electrons" || m_Electron_Or_Muon_Selection=="Electron" || m_Electron_Or_Muon_Selection=="Ele" || m_Electron_Or_Muon_Selection=="ELE") {
+   if(id.GetVersion().Contains("TT_powheg") || id.GetVersion().Contains("TT_Mtt"))
+     m_gen_presel_hadron = genpreselection_hadron->passSelection();
+ }
 
   if( id.GetVersion().Contains("TT")) m_gen_presel = genpreselection->passSelection();
 
   m_rec_presel = preselection->passSelection();
 
 
- if(id.GetVersion().Contains("TT_powheg") || id.GetVersion().Contains("TT_Mtt")){ //hadron selection only for POWHEG ttbar
-    if(!genpreselection->passSelection() && !genpreselection_hadron->passSelection() && !preselection->passSelection())throw SError( SError::SkipEvent );
-  }else{
-    if( id.GetVersion().Contains("TT")){
-      if( !genpreselection->passSelection() && !preselection->passSelection()){ throw SError( SError::SkipEvent );}
-    }else{
-    if(!preselection->passSelection())  throw SError( SError::SkipEvent );
-    }
-  }
+  //if(id.GetVersion().Contains("TT_powheg") || id.GetVersion().Contains("TT_Mtt")){ //hadron selection only for POWHEG ttbar
+    if(!m_gen_presel && !m_gen_presel_hadron && !m_rec_presel)throw SError( SError::SkipEvent );
+    //  }else{
+    //   if( id.GetVersion().Contains("TT")){
+    //     if( !m_gen_presel && !m_rec_presel){ throw SError( SError::SkipEvent );}
+    //  }else{
+    //  if(!m_rec_presel)  throw SError( SError::SkipEvent );
+    //   }
+    // }
   
 
 
@@ -212,7 +219,11 @@ void SubstructurePreSelectionCycle::ExecuteEvent( const SInputData& id, Double_t
   for(unsigned int i=0; i<uncleaned_jets.size(); ++i) {
     bcc->jets->push_back(uncleaned_jets.at(i));
   }
-
+  bcc->topjets->clear();
+  for(unsigned int i=0; i<uncleaned_topjets.size(); ++i) {
+    bcc->topjets->push_back(uncleaned_topjets.at(i));
+  }
+ 
   
   WriteOutputTree();
    

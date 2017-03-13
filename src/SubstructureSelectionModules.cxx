@@ -447,6 +447,7 @@ bool DR2ndGenCAJetLeptonSelection::pass(BaseCycleContainer *bcc)
     {
       dR = deltaR(bcc->cagenjets->at(1).v4(), ttbar->ChargedLepton().v4());
     }
+  else{cout << "wrong channel for DR slection on gen level" << endl;}
   delete ttbar;
 
   if(dR < m_dR_max) return true;
@@ -522,6 +523,38 @@ std::string GenCAJetMatchedSelection::description()
 {
     char s[100];
     sprintf(s, "deltaR(2nd cagenjet, top) < %.1f",m_dR_max);
+    return s;
+}
+
+
+GenCAJetFullyMergedSelection::GenCAJetFullyMergedSelection( double dR_max)
+{
+    m_dR_max = dR_max;
+}
+
+bool GenCAJetFullyMergedSelection::pass(BaseCycleContainer *bcc)
+{
+  if(!bcc->cagenjets->size()>0) return false;
+
+  TTbarGen *ttbar = new TTbarGen(bcc); 
+  double dR_b = 100;
+  double dR_q1 = 100;
+  double dR_q2 = 100;
+  if(!ttbar->DecayChannel() == TTbarGen::e_ehad && !ttbar->DecayChannel() == TTbarGen::e_muhad) 
+    cout << "wrong channel in matched selection"<<endl;
+  dR_b = deltaR(bcc->cagenjets->at(0).v4(), ttbar->BHad().v4());
+  dR_q1 = deltaR(bcc->cagenjets->at(0).v4(), ttbar->Q1().v4());
+  dR_q2 = deltaR(bcc->cagenjets->at(0).v4(), ttbar->Q2().v4());
+  delete ttbar;
+
+  if(dR_b < m_dR_max &&  dR_q1 < m_dR_max &&  dR_q2 < m_dR_max)return true;
+  return false;
+}
+
+std::string GenCAJetFullyMergedSelection::description()
+{
+    char s[100];
+    sprintf(s, "deltaR(2nd cagenjet, (hardonic b, quark1,2)) < %.1f",m_dR_max);
     return s;
 }
 
